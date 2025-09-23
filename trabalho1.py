@@ -1,7 +1,7 @@
 from random import sample
 
 print('')
-print('Bem vindo ao Campo Minado. Para jogar siga as instruções informadas no terminal ou no README')
+print('Bem vindo ao Campo Minado. Para jogar siga as instruções informadas no terminal ou no README') #Simples mensagem inicial para o usuário
 print('Feito por Rafael Alves Faria')
 print('')
 
@@ -45,7 +45,7 @@ while True :
 
 
 
-def contar_bombas_vizinhas(x, y, largura, altura, posicoes_minas):
+def contar_bombas_vizinhas(x, y, largura, altura, posicoes_minas):                              #Função que conta quantas minas estão presentes ao redor da posição escolhida pelo usuário, recebe as coordenadas da posição escolhida, o tamanho da matriz (altura e largura) e a lista da posição das minas
     total_bombas_vizinhas = 0
     
     for posicao_horizontal in [-1,0,1] :
@@ -66,72 +66,79 @@ def contar_bombas_vizinhas(x, y, largura, altura, posicoes_minas):
     return total_bombas_vizinhas
 
 
-while True:
+while True: #Vai repetir esse loop ao até o usuário perder ou ganhar no jogo 
     
-    minas_achadas = 0
+    minas_achadas = 0   #Variável que armazena quantas bombas foram marcadas pelo usuário
 
-    for i in posicoes_minas:
+    for i in posicoes_minas:    #Transforma os números da aleatórios da lista de bombas em posições para a matriz do campo minado
         linha = i// largura
         coluna = i % largura
 
-        if colunas[linha][coluna] == 'M':
-            minas_achadas += 1
+        if colunas[linha][coluna] == 'M':#Verifica se a posição de alguma bomba está marcada com 'M' ou seja, se o usário marcou ela como suspeita
+            minas_achadas += 1 #Caso tenha ele acrescenta em 1 na variável de minas achadas 
 
-    if minas_achadas == minas:
+    if minas_achadas == minas:#Se o usuário achar todas as minas o jogo acaba e ele vence
         print('Fim de Jogo. Você Venceu')
         break
 
-    else:
+    else:#Caso ele não tenha achado todas as minas, então o jogo continua
 
         #MENU
-        for i in range(altura):
+        for i in range(altura):#Printa a matriz do campo minado de forma formatada para melhor visualização do usuário
+            print(f'[{i}]')
             for j in range(largura):
                 print(colunas[i][j], end = ' ')
             print(' ')
 
         print('')
-        print('Digite agora o que gostaria de fazer:')
+        print('Digite agora o que gostaria de fazer:')      #Menu simples em loop que mostra as opções que o usuário tem
         print('1 - Marcar uma posição suspeita')
         print('2 - Escolher uma posição')
         print('0 - Sair')
 
-        decisao = int(input('->  '))
+        decisao = int(input('->  '))                        #Recebe a opção escolhida pelo usuário
         print('')
 
-        if decisao == 0:
+        if decisao == 0:                                    #Se o usuário escolher 0 o programa se encerra
             break
-        
-        if decisao == 1:
+
+        if decisao == 1:                                    #Se o usuário escolher 1 ele deve então escolher uma posição da matriz para marca-la como suspeita, ou seja, irá substituir '*' por 'M' dentro da matriz
             y = int(input('Digite uma coluna: '))
             x = int(input('Digite uma linha: '))
 
             colunas[x][y] = 'M'
-        
-        if decisao == 2:
+    
+        if decisao == 2:                                    #Se o usuário digitar 2 ele deve escolher uma posição para jogar
             y = int(input('Digite uma coluna: '))
             x = int(input('Digite uma linha: '))
+        
+            if (x < largura) and not (x > largura) and (y < altura) and not (y > altura):       #Verifica se a posição escolhida está realmente dentro da matriz
+                posicao = x * largura + y                                                       #Calcula o indice da posição, para que possa comparar com os das bombas
 
-            posicao = x * largura + y
+                if colunas[x][y] == '*':                                                        #Se a posição escolhida for '*' ele irá executar a função "contar_bombas_vizinhas" e vai substituir o '*' pelo valor retornado da função, ou seja, o número de bombas ao redor da posição escolhida
 
-            if colunas[x][y] == '*':
+                    total_bombas_vizinhas = contar_bombas_vizinhas(x,y,largura,altura,posicoes_minas)
+                    colunas[x][y] = str(total_bombas_vizinhas)
 
-                total_bombas_vizinhas = contar_bombas_vizinhas(x,y,largura,altura,posicoes_minas)
-                colunas[x][y] = str(total_bombas_vizinhas)
+                if posicao in posicoes_minas:                                                   #Se o indice da posição escolhida pelo usuário estiver presente na lista das posições de bomba, então ele terá escolhido uma bomba e por isso irá perder o jogo
+                    
+                    print('')
+                    print('Game Over')
+                    print('')
 
-            if posicao in posicoes_minas:
-                
+                    for i in posicoes_minas:                                                    #Ao perder será exibido a matriz completa mostrando a localização de cada bomba, representadas por 'B'
+                        linha = i// largura
+                        coluna = i % largura
+                        colunas[linha][coluna] = "B"
+
+                    for i in range(altura):                                                     #Printa a matriz formatada
+                        for j in range(largura):
+                            print(colunas[i][j], end = ' ')
+                        print(' ')
+                    
+                    break
+            else:                                                                              #Se for escolhida uma posição fora da matriz será pedido ao usuário que ele escolha uma posição válida
                 print('')
-                print('Game Over')
+                print(f'Selecione uma posição dentro da matriz [{largura}][{altura}]')
                 print('')
-
-                for i in posicoes_minas:
-                    linha = i// largura
-                    coluna = i % largura
-                    colunas[linha][coluna] = "B"
-
-                for i in range(altura):
-                    for j in range(largura):
-                        print(colunas[i][j], end = ' ')
-                    print(' ')
-                
-                break
+            
