@@ -1,10 +1,11 @@
 # Trabalho-1-Python-(-Campo-Minado-)
-Feito por Rafael Alves Faria
+<ins> Feito por Rafael Alves Faria </ins>
 
-Como jogar:
+## Como jogar:
+
 Ao iniciar o programa/jogo será exibido uma mensagem de boas vindas. Após isso, o usuário deve digitar o número de linhas e colunas para a campo minado e logo em seguida, digitar quantas minas estarão escondidas no campo.
 
-Obs: É importante que o usuário não digite uma quantidade de bombas maior do que o tamanho do campo, caso o faça será pedido que ele informe novamente os dados pedidos antes.
+*Obs:* É importante que o usuário não digite uma quantidade de bombas maior do que o tamanho do campo, caso o faça será pedido que ele informe novamente os dados pedidos antes.
 
 Após isso, será exibido o campo minado que foi descrito pelo usuário, com todas as casas estarão preenchidas dessa forma: ' * '. 
 
@@ -16,10 +17,10 @@ Agora se o usuário escolher marcar uma posição, caso a casa esteja vazia, mes
 
 Para vencer o jogo, o usuário deve marcar todas as posições que tenham uma bomba como suspeita, ou seja, todas as posições com bomba devem estar como: ' M '.
 
-Limitações:
+## Limitações:
 
-O limite máximo para o campo minado é de 10x10.
+* O limite máximo para o campo minado é de 10x10.
 
-Caso o usuário escolha não jogar e simplesmente marcar todas as casas como suspeitas, eventualmente irá vencer o jogo, já que basta as casas com bombas estarem marcadas como suspeitas para que se vença.
+* Caso o usuário escolha não jogar e simplesmente marcar todas as casas como suspeitas, eventualmente irá vencer o jogo, já que basta as casas com bombas estarem marcadas como suspeitas para que se vença.
 
-Caso o usuário marque o número de minas no campo como 0, então ele irá vencer o jogo antes mesmo de se gerar o campo.
+* Caso o usuário marque o número de minas no campo como 0, então ele irá vencer o jogo antes mesmo de se gerar o campo.
