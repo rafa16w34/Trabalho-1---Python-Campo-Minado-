@@ -14,7 +14,7 @@ Caso o usuário escolha marcar uma posição como suspeita, lhe será pedido uma
 
 Agora se o usuário escolher marcar uma posição, caso a casa esteja vazia, mesmo que tenha sido marcada anteriormente, ao ser selecionada a casa mostrará um número de 0 a 8 que indicará quantas bombas estão ao redor daquele quadrado. Mas caso a posição escolhida tenha uma bomba o usuário receberá a mensagem de " Game Over " e também a matriz exibindo a localização de todas as bombas.
 
-Para vencer o jogo, o usuário deve marcar todas as posições que tenham uma bomba como susoeita, ou seja, todas as posições com bomba devem estar como: ' M '.
+Para vencer o jogo, o usuário deve marcar todas as posições que tenham uma bomba como suspeita, ou seja, todas as posições com bomba devem estar como: ' M '.
 
 Limitações:
 
