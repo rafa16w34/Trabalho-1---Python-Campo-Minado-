@@ -1,47 +1,57 @@
 from random import sample
 
-print('')
-print('Bem vindo ao Campo Minado. Para jogar siga as instruções informadas no terminal ou no README') #Simples mensagem inicial para o usuário
-print('Feito por Rafael Alves Faria')
-print('')
+print('Bem vindo ao Campo Minado. Para jogar siga as instruções informadas no terminal ou no README.\nFeito por Rafael Alves Faria\n') #Simples mensagem inicial para o usuário
 
 while True :
-    altura = int(input('Digite a extensão vertical do campo minado:'))                          #Usuario escolhe a altura da matriz do campo minado 
-    largura = int(input('Digite a extensão horizontal do campo minado:'))                       #Usuario escolhe a largura da matriz do campo minado
+
+    try:
+        altura = int(input('Digite a extensão vertical do campo minado: '))                          #Usuario escolhe a altura da matriz do campo minado 
+        largura = int(input('Digite a extensão horizontal do campo minado: '))                       #Usuario escolhe a largura da matriz do campo minado
     
-    if altura <= 0 or largura <= 0 :  
-        print('')                                                                               #Barra o processo se o usuario digitar um numero de linhas e colunas igual ou menor que 0
-        print('Informe números maiores que 0')
-        print('')
-    
-    if altura > 10 or largura > 10 :  
-        print('')                                                                               #Barra o processo se o usuario digitar um numero de linhas e colunas igual ou menor que 0
-        print('Informe números menores que 10')
-        print('')
-    
-    else:
-            
-        print('')
-        minas = int(input('Digite a quantidade de minas para o campo minado do campo minado.')) #Usuario escolhe a quantidade de minas do campo minado 
-        print('')
+        if altura <= 0 or largura <= 0 :  
 
-        if (minas < (altura * largura)):                                                        #Se o numero de minas for menor que o numero de posições do campo, então o código continua
+            print('\nInforme números maiores que 0.\n')                                                 #Barra o processo se o usuario digitar um numero de linhas e colunas igual ou menor que 0
 
-            colunas = []                                                                        #Colunas é basicamente a Matriz que será preenchida pelas linhas
-
-            for i in range(altura):                                                             #Usa o valor fornecido pelo usuário para ir preenchendo a matriz com '*'
-                linha = []
-
-                for j in range(largura):
-                    linha.append('*')
-            
-                colunas.append(linha)
-            
-            posicoes_minas = sample(range(largura * altura),minas)
-            break
         
-        else:                                                                                   #Caso o usuário digite um número de minas maior que os epaços da matriz, o programa não rodará
-            print('Número de minas é maior do que o suportado no campo escolhido')
+        if altura > 10 or largura > 10 :  
+
+            print('\nInforme números menores que 10.\n')                                            #Barra o processo se o usuario digitar um numero de linhas e colunas igual ou menor que 0
+
+        
+        
+        else:
+
+            try:   
+                
+                minas = int(input('\nDigite a quantidade de minas para o campo minado do campo minado: ')) #Usuario escolhe a quantidade de minas do campo minado 
+                
+
+
+                if (minas < (altura * largura)):                                                        #Se o numero de minas for menor que o numero de posições do campo, então o código continua
+
+                    colunas = []                                                                        #Colunas é basicamente a Matriz que será preenchida pelas linhas
+
+                    for i in range(altura):                                                             #Usa o valor fornecido pelo usuário para ir preenchendo a matriz com '*'
+                        linha = []
+
+                        for j in range(largura):
+                            linha.append('*')
+                    
+                        colunas.append(linha)
+                    
+                    posicoes_minas = sample(range(largura * altura),minas)
+                    break
+                
+                else:                                                                                   #Caso o usuário digite um número de minas maior que os epaços da matriz, o programa não rodará
+                    print('\nNúmero de minas é maior do que o suportado no campo escolhido.\n')
+            
+            except ValueError:
+                print(f'\nO número de minas no campo deve ser um número inteiro.\n')
+    
+    except ValueError:                                                                               #Caso o usuário não digite algo do tipo inteiro
+        print(f'\nA altura e largura devem ser números inteiros.\n')
+
+
 
 
 
@@ -49,7 +59,7 @@ def contar_bombas_vizinhas(x, y, largura, altura, posicoes_minas):              
     total_bombas_vizinhas = 0
     
     for posicao_horizontal in [-1,0,1] :
-        for posicao_vertical in [-1.0,1]:
+        for posicao_vertical in [-1,0,1]:
             
             if posicao_horizontal == 0 and posicao_vertical == 0:                               #Se isso for verdade estaremos olhando para a própria posição escolhida, o que não faz sentido, pois caso se escolha a bomba o jogo deve acabar
                 continue                                                                        #Faz com que ignoremos essa possibilidade
@@ -119,52 +129,66 @@ while True: #Vai repetir esse loop ao até o usuário perder ou ganhar no jogo
 
         perdeu = False
 
-        printar_campo_minado(altura,largura,perdeu)
-
-        print('')
-        print('Digite agora o que gostaria de fazer:')      #Menu simples em loop que mostra as opções que o usuário tem
-        print('1 - Marcar uma posição suspeita')
-        print('2 - Escolher uma posição')
-        print('0 - Sair')
-
-        decisao = int(input('->  '))                        #Recebe a opção escolhida pelo usuário
         print('')
 
-        if decisao == 0:                                    #Se o usuário escolher 0 o programa se encerra
-            break
+        printar_campo_minado(altura,largura,perdeu)         #Função de printar o campo minado, recebe a altura, a largura e a varíavel booleana perdeu
 
-        if decisao == 1:                                    #Se o usuário escolher 1 ele deve então escolher uma posição da matriz para marca-la como suspeita, ou seja, irá substituir '*' por 'M' dentro da matriz
-            y = int(input('Digite uma coluna: '))
-            x = int(input('Digite uma linha: '))
 
-            colunas[x][y] = 'M'
-    
-        if decisao == 2:                                    #Se o usuário digitar 2 ele deve escolher uma posição para jogar
-            y = int(input('Digite uma coluna: '))
-            x = int(input('Digite uma linha: '))
-        
-            if (x < largura) and not (x > largura) and (y < altura) and not (y > altura):       #Verifica se a posição escolhida está realmente dentro da matriz
-                posicao = x * largura + y                                                       #Calcula o indice da posição, para que possa comparar com os das bombas
+        print('\nDigite agora o que gostaria de fazer:\n1 - Marcar uma posição suspeita\n2 - Escolher uma posição\n0 - Sair\n')      #Menu simples em loop que mostra as opções que o usuário tem
 
-                if colunas[x][y] == '*':                                                        #Se a posição escolhida for '*' ele irá executar a função "contar_bombas_vizinhas" e vai substituir o '*' pelo valor retornado da função, ou seja, o número de bombas ao redor da posição escolhida
+        try:                                                #Verifica se o usuário não ira digitar algo diferente de um número inteiro
+            decisao = int(input('->  '))                        #Recebe a opção escolhida pelo usuário
+            print('')
 
-                    total_bombas_vizinhas = contar_bombas_vizinhas(x,y,largura,altura,posicoes_minas)
-                    colunas[x][y] = str(total_bombas_vizinhas)
+            if decisao == 0:                                    #Se o usuário escolher 0 o programa se encerra
+                break
 
-                if posicao in posicoes_minas:                                                   #Se o indice da posição escolhida pelo usuário estiver presente na lista das posições de bomba, então ele terá escolhido uma bomba e por isso irá perder o jogo
-                    
-                    perdeu = True
+            if decisao == 1:                                    #Se o usuário escolher 1 ele deve então escolher uma posição da matriz para marca-la como suspeita, ou seja, irá substituir '*' por 'M' dentro da matriz
+                y = int(input('Digite uma coluna: '))
+                x = int(input('Digite uma linha: '))
+
+                if (x < largura) and not (x > largura) and (y < altura) and not (y > altura):       #Verifica se a posição escolhida está realmente dentro da matriz
+
+                    if colunas[x][y] == '*':
+                        colunas[x][y] = 'M'
 
                     print('')
-                    print('Game Over')
-                    print('')
-
-                    printar_campo_minado(altura,largura,perdeu)
+                
+                else:                                                                              #Se for escolhida uma posição fora da matriz será pedido ao usuário que ele escolha uma posição válida
                     
-                    print(' ')
-                    break
-            else:                                                                              #Se for escolhida uma posição fora da matriz será pedido ao usuário que ele escolha uma posição válida
-                print('')
-                print(f'Selecione uma posição dentro da matriz [{largura}][{altura}]')
+                    print(f'\nSelecione uma posição dentro da matriz [{largura}][{altura}]\n')
+ 
+
+            if decisao == 2:                                    #Se o usuário digitar 2 ele deve escolher uma posição para jogar
+                y = int(input('Digite uma coluna: '))
+                x = int(input('Digite uma linha: '))
+
                 print('')
             
+                if (x < largura) and not (x > largura) and (y < altura) and not (y > altura):       #Verifica se a posição escolhida está realmente dentro da matriz
+                    posicao = x * largura + y                                                       #Calcula o indice da posição, para que possa comparar com os das bombas
+
+                    if colunas[x][y] == '*' or colunas[x][y] == 'M':                                                        #Se a posição escolhida for '*' ele irá executar a função "contar_bombas_vizinhas" e vai substituir o '*' pelo valor retornado da função, ou seja, o número de bombas ao redor da posição escolhida
+
+                        total_bombas_vizinhas = contar_bombas_vizinhas(x,y,largura,altura,posicoes_minas)
+                        colunas[x][y] = str(total_bombas_vizinhas)
+
+                    if posicao in posicoes_minas:                                                   #Se o indice da posição escolhida pelo usuário estiver presente na lista das posições de bomba, então ele terá escolhido uma bomba e por isso irá perder o jogo
+                        
+                        perdeu = True
+
+                        
+                        print('\nGame Over\n')
+                        
+
+                        printar_campo_minado(altura,largura,perdeu)                                 #Nesse caso, agora o campo mostra as bomabas que estavam escondidas, pois a variável perdeu = True
+                        
+                        print(' ')
+                        break
+                else:                                                                              #Se for escolhida uma posição fora da matriz será pedido ao usuário que ele escolha uma posição válida
+                    
+                    print(f'\nSelecione uma posição dentro da matriz [{largura}][{altura}]\n')
+                    
+        
+        except ValueError:
+            print(f'\nDigite umas das opções mostradas no Menu.\n')
