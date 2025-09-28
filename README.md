@@ -1,4 +1,4 @@
-# Trabalho-1-Python-(-Campo-Minado-)
+# Trabalho 1 Python ( Campo Minado )
 <ins> Feito por Rafael Alves Faria </ins>
 
 ## Como jogar:
