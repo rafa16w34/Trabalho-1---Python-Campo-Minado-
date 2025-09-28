@@ -66,6 +66,38 @@ def contar_bombas_vizinhas(x, y, largura, altura, posicoes_minas):              
     return total_bombas_vizinhas
 
 
+def printar_campo_minado(altura,largura,perdeu):                                                      #Função que printa o campo minado
+    numero_colunas = []    #Uma lista que salva quantas colunas o campo tem, para que seja exibido e fique mais intuitivo ao usuário
+    numero = 0
+
+    if perdeu == True:
+        for i in posicoes_minas:                                                    #Ao perder será exibido a matriz completa mostrando a localização de cada bomba, representadas por 'B'
+            linha = i// largura
+            coluna = i % largura
+            colunas[linha][coluna] = "B"
+
+    for i in range(largura):                 #Preenche a lista da interface com o numero de colunas
+        numero_colunas.append(numero)
+        numero = numero + 1
+
+    for i in range(numero):     #Printa os numeros das colunas
+
+        if i == 0:
+            print('  ',end='')
+
+        print(f' {numero_colunas[i]}',end='')
+    
+    print(' ')
+
+    for i in range(altura):#Printa a matriz do campo minado de forma formatada para melhor visualização do usuário
+        for j in range(largura):
+
+            if (j == 0):
+                print(f'[{i}]',end = '')
+
+            print(f'{colunas[i][j]}', end = ' ')
+        print(' ')
+
 while True: #Vai repetir esse loop ao até o usuário perder ou ganhar no jogo 
     
     minas_achadas = 0   #Variável que armazena quantas bombas foram marcadas pelo usuário
@@ -84,11 +116,10 @@ while True: #Vai repetir esse loop ao até o usuário perder ou ganhar no jogo
     else:#Caso ele não tenha achado todas as minas, então o jogo continua
 
         #MENU
-        for i in range(altura):#Printa a matriz do campo minado de forma formatada para melhor visualização do usuário
-            print(f'[{i}]')
-            for j in range(largura):
-                print(colunas[i][j], end = ' ')
-            print(' ')
+
+        perdeu = False
+
+        printar_campo_minado(altura,largura,perdeu)
 
         print('')
         print('Digite agora o que gostaria de fazer:')      #Menu simples em loop que mostra as opções que o usuário tem
@@ -122,20 +153,15 @@ while True: #Vai repetir esse loop ao até o usuário perder ou ganhar no jogo
 
                 if posicao in posicoes_minas:                                                   #Se o indice da posição escolhida pelo usuário estiver presente na lista das posições de bomba, então ele terá escolhido uma bomba e por isso irá perder o jogo
                     
+                    perdeu = True
+
                     print('')
                     print('Game Over')
                     print('')
 
-                    for i in posicoes_minas:                                                    #Ao perder será exibido a matriz completa mostrando a localização de cada bomba, representadas por 'B'
-                        linha = i// largura
-                        coluna = i % largura
-                        colunas[linha][coluna] = "B"
-
-                    for i in range(altura):                                                     #Printa a matriz formatada
-                        for j in range(largura):
-                            print(colunas[i][j], end = ' ')
-                        print(' ')
+                    printar_campo_minado(altura,largura,perdeu)
                     
+                    print(' ')
                     break
             else:                                                                              #Se for escolhida uma posição fora da matriz será pedido ao usuário que ele escolha uma posição válida
                 print('')
