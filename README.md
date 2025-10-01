@@ -37,4 +37,3 @@ Para vencer o jogo, o usuário deve marcar todas as posições que tenham uma bo
 
 * Caso o usuário escolha não jogar e simplesmente marcar todas as casas como suspeitas, eventualmente irá vencer o jogo, já que basta as casas com bombas estarem marcadas como suspeitas para que se vença.
 
-* Caso o usuário marque o número de minas no campo como 0, então ele irá vencer o jogo antes mesmo de se gerar o campo.
