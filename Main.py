@@ -5,8 +5,8 @@ print('Bem vindo ao Campo Minado. Para jogar siga as instruções informadas no 
 while True :
 
     try:
-        altura = int(input('Digite a extensão vertical do campo minado: '))                          #Usuário escolhe a altura da matriz do campo minado.
-        largura = int(input('Digite a extensão horizontal do campo minado: '))                       #Usuário escolhe a largura da matriz do campo minado.
+        altura = int(input('Digite a extensão vertical do campo minado (Tamanho mínimo: 1 e máximo: 10): '))                          #Usuário escolhe a altura da matriz do campo minado.
+        largura = int(input('Digite a extensão horizontal do campo minado (Tamanho mínimo: 1 e máximo: 10): '))                       #Usuário escolhe a largura da matriz do campo minado.
     
         if altura <= 0 or largura <= 0 :  
 
@@ -27,7 +27,7 @@ while True :
                 
 
 
-                if (minas < (altura * largura)):                                                        #Se o número de minas for menor que o número de posições do campo, então o jogo continua normalmente.
+                if (minas < (altura * largura)) and minas > 0:                                                        #Se o número de minas for menor que o número de posições do campo, então o jogo continua normalmente.
 
                     colunas = []                                                                        #A lista "Colunas" é basicamente a Matriz que será preenchida pelas linhas, já que as colunas são sempre printadas primeiro.
 
@@ -42,8 +42,11 @@ while True :
                     posicoes_minas = sample(range(largura * altura),minas)
                     break
                 
-                else:                                                                                   #Caso o usuário digite um número de minas maior que os epaços da matriz, o jogo não irá aceitar.
+                elif (minas >= (altura * largura)):                                                                                   #Caso o usuário digite um número de minas maior que os epaços da matriz, o jogo não irá aceitar.
                     print('\nNúmero de minas é maior do que o suportado no campo escolhido.\n')
+
+                elif (minas <= 0):
+                    print('\nO número de minas deve ser maior que 0.\n')
             
             except ValueError:
                 print(f'\nO número de minas no campo deve ser um número inteiro.\n')
