@@ -123,7 +123,7 @@ while True:                     #Vai repetir esse loop ao até o usuário perder
             minas_achadas += 1                     #Caso tenha ele acrescenta em 1 na variável de minas achadas.
 
     if minas_achadas == minas:                     #Se o usuário marcar todas as minas como posições suspeitas o jogo acaba e ele vence.
-        print('Fim de Jogo. Você Venceu')
+        print('Fim de Jogo. Você Venceu.')
         break
 
     else:                                          #Caso ele não tenha achado todas as minas, então o jogo continua.
