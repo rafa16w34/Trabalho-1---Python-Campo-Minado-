@@ -1,6 +1,8 @@
 # Trabalho 1 de Python (<ins> Campo Minado </ins>)
 <ins> Feito por Rafael Alves Faria </ins>
 
+[![Meu Vídeo](https://img.youtube.com/vi/5ctbmf-EERw/mqdefault.jpg)](https://www.youtube.com/watch?v=5ctbmf-EERw)
+
 ## Como jogar:
 
 Ao iniciar o programa/jogo será exibido uma mensagem de boas vindas. Após isso, o usuário deve digitar o número de linhas e colunas para a campo minado e logo em seguida, digitar quantas minas estarão escondidas no campo.
